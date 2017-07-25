@@ -20,3 +20,49 @@ for line in storyFile:
 #Example: a key might be 'cat', and frequency_table['cat'] might be 5 if the word 'cat'
 #appears 5 times in the storyWords list
 frequency_table = {}
+#ALL OF OUR CODE GOES HERE
+for word in storyWords:
+
+#if I have not seen any words of this type before, add a new entry
+#1 is referring to how many times you've seen it before
+    if word not in frequency_table:
+        frequency_table[word] = 1
+
+#if I have seen it before, add 1 to its current count
+    else:
+        frequency_table[word] = 1 + frequency_table[word]
+
+print(frequency_table)
+
+#this is a function that finds the most frequent word
+def find_max_frequency():
+    #at the start, I haven't seen any words
+    #but I want to keep track of the most frequent word I've seen so far
+    max_freq = 0
+    max_word = ' '
+
+    #look through ALL words in the frequency table
+    for word in frequency_table:
+
+        #if the word I'm looking at now has appeared more than any
+        #words I've seen so far, update my max
+        if frequency_table[word] > max_freq:
+            max_freq = frequency_table[word]
+            max_word = word
+
+    #at the end of the for loop, we've looked through all entries and max_word has the most frequent word in it
+    return max_word
+
+best_word = find_max_frequency()
+print("The most frequent word is: " + best_word)
+
+#make a fucntion to find the top 10
+#CHALLENGE: modify this so it takes the top N
+def top_twenty():
+    #take the most frequent word out of the frequency table 10 times
+    for count in range(20):
+        top_word = find_max_frequency()
+        print(top_word + " appears " + str(frequency_table[top_word]))
+        del(frequency_table[top_word]) #take that entry out of the table
+#call the top ten function
+top_twenty()
